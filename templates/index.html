@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Video Service</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+	<div class="main">
+		<h3>This form does nothing</h3>
+		<form>
+			<input type="file" name="video" accept="video/*" method="post" enctype="multipart/form-data">
+			<br>
+			<button type="submit">Send</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+body {
+	margin: 0;
+	font-family: sans-serif;
+}
+
+.main {
+	margin: 30px auto 0;
+	padding: 0 15px;
+	max-width: 1170px;
+}
+
+h3 {
+	text-align: center;
+}
+
+form {
+	display: block;
+	max-width: 400px;
+	margin: 0 auto;
+	background: #f3f3f3;
+	border: #e3e3e3;
+	padding: 30px;
+}
+
+form input {
+	margin-bottom: 10px;
+}
