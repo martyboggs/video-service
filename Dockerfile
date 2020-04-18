@@ -5,8 +5,8 @@ ENV SERVICE video-service
 WORKDIR /opt/$SERVICE
 ENV PYTHONPATH=/opt/$SERVICE
 
-RUN groupadd -r etl \
-    && useradd -r -g etl etl
+RUN groupadd -r vs \
+    && useradd -r -g vs vs
 
 RUN apt-get update && apt-get install -y \
       cron \
@@ -31,3 +31,7 @@ RUN rm -rf /var/lib/apt/lists/* \
     && apt-get autoremove -y \
     && apt-get clean
 
+
+USER vs
+
+CMD ["/start.sh"]
