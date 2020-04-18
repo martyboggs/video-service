@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.pytest_cache
+*.pyc
 
 # C extensions
 *.so
@@ -87,6 +89,12 @@ ipython_config.py
 
 # VS Code
 .vscode
+
+# exclude PyCharm metadata
+.idea
+
+# exclude coverage
+.coverage
 
 # pyenv
 .python-version
