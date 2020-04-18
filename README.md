@@ -1,15 +1,12 @@
-To get started, get a Python environment running. 
 
-I have Python version 3.6.5
-
-Install flask
-
-`pip install Flask`
 
 Launch:
 
-`FLASK_APP=app.py flask run`
+`docker-compose up`
 
+This will build flask, nginx, and uWSGI
+
+Also, it will start mysql DB
 
 Ideas: 
 - take videos, display kaleidoscope
