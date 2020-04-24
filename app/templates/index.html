@@ -9,12 +9,15 @@
 </head>
 <body>
 	<div class="main">
-		<h3>This form does nothing</h3>
-		<form>
-			<input type="file" name="video" accept="video/*" method="post" enctype="multipart/form-data">
-			<br>
-			<button type="submit">Send</button>
-		</form>
+		<h3>This form tries to upload to S3</h3>
+		<div class="form">
+			<input class="form__file" id="form__file" type="file" name="video" accept="video/*" method="post" enctype="multipart/form-data">
+			<form>
+				<input class="form__changes" type="text" name="changes" placeholder="video edit data">
+				<button class="form__submit" type="submit">Send</button>
+			</form>	
+		</div>
 	</div>
+	<script src="/static/js/main.js"></script>
 </body>
 </html>

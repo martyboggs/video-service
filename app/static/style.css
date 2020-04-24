@@ -13,7 +13,7 @@ h3 {
 	text-align: center;
 }
 
-form {
+.form {
 	display: block;
 	max-width: 400px;
 	margin: 0 auto;
@@ -22,6 +22,15 @@ form {
 	padding: 30px;
 }
 
-form input {
-	margin-bottom: 10px;
+.form__file {
+	margin: 5px;
+}
+
+.form__changes {
+	width: 100%;
+	margin: 5px;
+}
+
+.form__submit {
+	margin: 5px;
 }
