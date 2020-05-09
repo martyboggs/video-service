@@ -1,13 +1,5 @@
-
-
-Launch:
-
-`docker-compose up`
-
-This will build flask, nginx, and uWSGI
-
-Also, it will start mysql DB
-
+# Video-Service
+A self serving api that converts all your video needs.
 Ideas: 
 - take videos, display kaleidoscope
 - take videos from cloud sources (google drive, apple icloud)
@@ -15,6 +7,10 @@ Ideas:
 - put it on YouTube with API
 
 
+### Launch locally
+```
+docker-compose up
+```
 
 ## localstack setup
 ```
