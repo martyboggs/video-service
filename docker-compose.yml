@@ -8,6 +8,30 @@ services:
     ports:
       - 8080:80
 
+  localstack:
+    container_name: s3
+    image: localstack/localstack:0.11.1
+    ports:
+      - "4566-4599:4566-4599"
+#      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
+    environment:
+#      - SERVICES=${SERVICES- }
+      - SERVICES=s3
+#      - DEBUG=${DEBUG- }
+      - DEBUG=1
+      - DATA_DIR=./localstack/data
+#      - PORT_WEB_UI=${PORT_WEB_UI- }
+#      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
+#      - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
+#      - DOCKER_HOST=unix:///var/run/docker.sock
+#      - HOST_TMP_FOLDER=${TMPDIR}
+      - AWS_DEFAULT_REGION=us-west-2
+      - AWS_ACCESS_KEY_ID=not
+      - AWS_SECRET_ACCESS_KEY=real
+#    volumes:
+#      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+#      - "/var/run/docker.sock:/var/run/docker.sock"
+
 #  mysql:
 #    image: mysql:5.7
 #    container_name: 'mysql'
