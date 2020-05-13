@@ -1,22 +1,22 @@
-from app.routes import app
 import boto3
 import os
 import json
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, Blueprint
 
+video_api = Blueprint('video_api', __name__)
 
-@app.route('/save-video')
+@video_api.route('/save-video')
 def save_video():
   return 'yes'
 
 
 # https://devcenter.heroku.com/articles/s3-upload-python
-@app.route("/account/")
+@video_api.route("/account/")
 def account():
   return render_template('account.html')
 
 
-@app.route('/sign_s3/')
+@video_api.route('/sign_s3/')
 def sign_s3():
   S3_BUCKET = os.environ.get('S3_BUCKET')
 
@@ -42,7 +42,7 @@ def sign_s3():
   })
 
 
-@app.route("/submit_form/", methods=["POST"])
+@video_api.route("/submit_form/", methods=["POST"])
 def submit_form():
   username = request.form["username"]
   full_name = request.form["full-name"]
