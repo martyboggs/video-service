@@ -13,6 +13,14 @@ h3 {
 	text-align: center;
 }
 
+.nav {
+	margin: 15px;
+}
+
+.videos {
+	padding: 15px;
+}
+
 .form {
 	display: block;
 	max-width: 400px;
