@@ -11,12 +11,12 @@ def save_video():
 
 
 # https://devcenter.heroku.com/articles/s3-upload-python
-@video_api.route("/account/")
+@video_api.route('/account')
 def account():
   return render_template('account.html')
 
 
-@video_api.route('/sign_s3/')
+@video_api.route('/sign_s3')
 def sign_s3():
   S3_BUCKET = os.environ.get('S3_BUCKET')
 
@@ -28,10 +28,10 @@ def sign_s3():
   presigned_post = s3.generate_presigned_post(
     Bucket=S3_BUCKET,
     Key=file_name,
-    Fields={"acl": "public-read", "Content-Type": file_type},
+    Fields={'acl': 'public-read', 'Content-Type': file_type},
     Conditions=[
-      {"acl": "public-read"},
-      {"Content-Type": file_type}
+      {'acl': 'public-read'},
+      {'Content-Type': file_type}
     ],
     ExpiresIn=3600
   )
@@ -42,11 +42,11 @@ def sign_s3():
   })
 
 
-@video_api.route("/submit_form/", methods=["POST"])
+@video_api.route('/submit_form', methods=['POST'])
 def submit_form():
-  username = request.form["username"]
-  full_name = request.form["full-name"]
-  avatar_url = request.form["avatar-url"]
+  username = request.form['username']
+  full_name = request.form['full-name']
+  avatar_url = request.form['avatar-url']
 
   update_account(username, full_name, avatar_url)
 
