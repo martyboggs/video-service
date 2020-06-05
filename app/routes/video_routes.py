@@ -5,7 +5,7 @@ from flask import render_template, request, redirect, url_for, Blueprint
 
 video_api = Blueprint('video_api', __name__)
 
-@video_api.route('/save-video')
+@video_api.route('/save', methods=['POST'])
 def save_video():
   return 'yes'
 

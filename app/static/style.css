@@ -21,7 +21,7 @@ h3 {
 	padding: 15px;
 }
 
-.form {
+.tool {
 	display: block;
 	max-width: 400px;
 	margin: 0 auto;
@@ -30,15 +30,15 @@ h3 {
 	padding: 30px;
 }
 
-.form__file {
+.tool__file {
 	margin: 5px;
 }
 
-.form__changes {
+.tool__changes {
 	width: 100%;
 	margin: 5px;
 }
 
-.form__submit {
+.tool__submit {
 	margin: 5px;
 }
