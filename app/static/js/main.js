@@ -1,52 +1,62 @@
 (function () {
 	window.video_service = {};
 
-	document.getElementById('form__file').onchange = function (e) {
-		var files = e.target.files;
+	$('.tool form').on('submit', function (e) {
+		e.preventDefault();
+		var files = $(e.target).find('.tool__file').get(0).files;
 		var file = files[0];
 		if (!file) {
 			return alert('No file selected.');
 		}
-		getSignedRequest(file);
-	};
+		getSignedRequest(file, e.target);
+	});
 
-	function getSignedRequest(file) {
-		var xhr = new XMLHttpRequest();
-		xhr.open('GET', '/video/sign_s3?file_name=' + file.name + '&file_type=' + file.type);
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState === 4) {
-				if (xhr.status === 200) {
-					var response = JSON.parse(xhr.responseText);
-					uploadFile(file, response.data, response.url);
-				} else {
-					alert('Could not get signed URL.');
-				}
+	function getSignedRequest(file, target) {
+		$.get({
+			url: '/video/sign_s3',
+			dataType: 'json',
+			data: {
+				file_name: file.name,
+				file_type: file.type
 			}
-		};
-		xhr.send();
+		}).done(function (response) {
+			uploadFile(file, response);
+			sendData(file, $(target).serializeArray());
+		}).fail(function (err) {
+			console.log(err);
+			alert('Could not get signed URL.');
+		});
 	}
 
-	function uploadFile(file, s3Data, url) {
-		console.log(s3Data);
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST', s3Data.url);
-
+	function uploadFile(file, s3Data) {
+		if (window.location.protocol === 'http:') return alert('uploading is only allowed from https');
 		var postData = new FormData();
-		for (key in s3Data.fields) {
-			postData.append(key, s3Data.fields[key]);
+		for (key in s3Data.data.fields) {
+			postData.append(key, s3Data.data.fields[key]);
 		}
 		postData.append('file', file);
 
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState === 4) {
-				if (xhr.status === 200 || xhr.status === 204) {
-					document.getElementById('preview').src = url;
-					document.getElementById('avatar-url').value = url;
-				} else {
-					alert('Could not upload file.');
-				}
-			}
-		};
-		xhr.send(postData);
+		$.ajax({
+			type: 'POST',
+			url: s3Data.url,
+			enctype: 'multipart/form-data',
+			processData: false,
+			contentType: false,
+			cache: false,
+			data: postData
+		}).done(function (response) {
+			console.log('success', response);
+		}).fail(function (err) {
+			console.log(err);
+			alert('Could not upload file.' + err);
+		});
+	}
+
+	function sendData(file, data) {
+		data.push({name: 'file_name', value: file.name});
+		$.post('/video/save', data).done(function (response) {
+		}).fail(function (err) {
+			console.log(err);
+		});
 	}
 })();

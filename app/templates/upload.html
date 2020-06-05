@@ -6,6 +6,7 @@
 	<title>Video Service</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 	<div class="main">
@@ -13,12 +14,12 @@
 			<a href="/">home</a>
 			<a href="/upload">upload</a>
 		</div>
-		<h3>This form tries to upload to S3</h3>
-		<div class="form">
-			<input class="form__file" id="form__file" type="file" name="video" accept="video/*" method="post" enctype="multipart/form-data">
+		<h3>Upload your video</h3>
+		<div class="tool meme-tool">
 			<form>
-				<input class="form__changes" type="text" name="changes" placeholder="video edit data">
-				<button class="form__submit" type="submit">Send</button>
+				<input class="tool__file" type="file" name="video" accept="video/*" method="post" enctype="multipart/form-data">
+				<textarea class="tool__changes" type="text" name="changes" placeholder="Enter caption" rows="6"></textarea>
+				<button class="tool__submit" type="submit">Send</button>
 			</form>	
 		</div>
 	</div>
