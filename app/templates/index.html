@@ -15,7 +15,7 @@
 		</div>
 		<div class="videos">
 			{% for video in data %}
-				<video controls src="https://video-service2.s3.amazonaws.com/{{video.key}}"></video>
+				<video class="video" controls src="https://video-service2.s3.amazonaws.com/{{video.key}}"></video>
 			{% endfor %}
 		</div>
 	</div>

@@ -19,7 +19,33 @@ h3 {
 
 .videos {
 	padding: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-end;
 }
+
+.video {
+	max-width: 300px;
+	max-height: 300px;
+	width: 25%;
+	height: auto;	
+	padding: 5px;
+	box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+	.video {
+		width: 50%;
+	}
+}
+
+@media (max-width: 500px) {
+	.video {
+		width: 100%;
+	}
+}
+
+/* upload page */
 
 .tool {
 	display: block;
