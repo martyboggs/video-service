@@ -20,7 +20,7 @@
 				file_type: file.type
 			}
 		}).done(function (response) {
-			uploadFile(file, response);
+			uploadFile(file, response.data);
 			sendData(file, $(target).serializeArray());
 		}).fail(function (err) {
 			console.log(err);
@@ -29,10 +29,9 @@
 	}
 
 	function uploadFile(file, s3Data) {
-		if (window.location.protocol === 'http:') return alert('uploading is only allowed from https');
 		var postData = new FormData();
-		for (key in s3Data.data.fields) {
-			postData.append(key, s3Data.data.fields[key]);
+		for (key in s3Data.fields) {
+			postData.append(key, s3Data.fields[key]);
 		}
 		postData.append('file', file);
 
@@ -48,7 +47,7 @@
 			console.log('success', response);
 		}).fail(function (err) {
 			console.log(err);
-			alert('Could not upload file.' + err);
+			// alert('Could not upload file.' + err);
 		});
 	}
 
