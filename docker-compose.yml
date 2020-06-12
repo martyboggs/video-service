@@ -3,23 +3,28 @@ services:
   app:
     build: .
     volumes:
-    - ./app/main.py:/app/main.py
+    - ./app:/app
     - ./conf:/conf
     ports:
       - 8080:80
-
-  localstack:
-    container_name: s3
-    image: localstack/localstack:0.11.1
-    ports:
-      - "4566-4599:4566-4599"
     environment:
+      - S3_BUCKET=video-service2
+      - AWS_ACCESS_KEY_ID=AKIAIUHEQRAMNKD2OXWA
+      - AWS_SECRET_ACCESS_KEY=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
       - AWS_DEFAULT_REGION=us-west-2
-      - AWS_ACCESS_KEY_ID=not
-      - AWS_SECRET_ACCESS_KEY=real
-      - SERVICES=s3
-      - DEBUG=1
-      - DATA_DIR=./localstack/data
+
+#  localstack:
+#    container_name: s3
+#    image: localstack/localstack:0.11.1
+#    ports:
+#      - "4566-4599:4566-4599"
+#    environment:
+#      - AWS_DEFAULT_REGION=us-west-2
+#      - AWS_ACCESS_KEY_ID=not
+#      - AWS_SECRET_ACCESS_KEY=real
+#      - SERVICES=s3
+#      - DEBUG=1
+#      - DATA_DIR=./localstack/data
 
 #    volumes:
 #      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
