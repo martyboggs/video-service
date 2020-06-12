@@ -23,7 +23,7 @@ Default output format [None]: json
 
 ### create s3 bucket
 ```
-aws --endpoint-url=http://localhost:4566 s3 mb s3://video-service
+aws --endpoint-url=http://localhost:4566 s3 mb s3://video-service2
 ```
 
 ###  list s3 buckets
