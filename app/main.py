@@ -1,4 +1,3 @@
-
 import sys
 import os
 import boto3
@@ -7,6 +6,14 @@ from routes.video_routes import video_api
 from routes.test_routes import test_api
 # pylint: disable=E1101
 
+S3_BUCKET = os.environ.get('S3_BUCKET')
+ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
+SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+s3 = boto3.resource('s3',
+  aws_access_key_id=ACCESS_KEY,
+  aws_secret_access_key=SECRET_KEY
+)
+
 app = Flask(__name__)
 
 app.register_blueprint(video_api, url_prefix='/video')
@@ -14,11 +21,7 @@ app.register_blueprint(test_api, url_prefix='/test')
 
 @app.route('/')
 def index():
-  s3 = boto3.resource('s3')
-  # for bucket in s3.buckets.all():
-  #   print(bucket.name)
-  bucketName = 'video-service2'
-  bucket = s3.Bucket(bucketName)
+  bucket = s3.Bucket(S3_BUCKET)
   files = bucket.objects.all()
   return render_template('index.html', data=files)
 
