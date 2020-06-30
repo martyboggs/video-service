@@ -1,0 +1,128 @@
+
+
+
+
+CREATE TABLE users
+(
+	userId INT PRIMARY KEY IDENTITY(1,1),
+	first_name VARCHAR(40) NOT NULL,
+	last_name VARCHAR(40) NULL,
+	username VARCHAR(25) UNIQUE NOT NULL,
+	email VARCHAR(30) UNIQUE NOT NULL CHECK (email like '%_@%.com'),
+	[password] VARCHAR(15) NOT NULL,
+	date_created DATETIME2(2) DEFAULT GETUTCDATE() NOT NULL,
+	date_deleted DATETIME2(2) 
+)
+
+
+
+
+
+
+
+
+
+CREATE TABLE video
+(
+	videoId INT PRIMARY KEY IDENTITY(1,1),
+	userId INT REFERENCES users(userId) NOT NULL,
+	Video_name VARCHAR(30) NOT NULL,
+	Video_description VARCHAR(MAX) NULL,
+	latitude float NULL,
+	longitude float NULL,
+	video_path VARCHAR(MAX) NOT NULL,
+	Video_Likes INT NOT NULL,
+	Video_dislikes INT NOT NULL,
+	Video_length TIME NOT NULL,
+	Created_date DATETIME DEFAULT GETUTCDATE() NOT NULL,
+	Deleted_date DATETIME NOT NULL,
+
+)
+
+
+
+
+CREATE TABLE liked_videos
+(
+	likeid INT PRIMARY KEY IDENTITY(1,1),
+	userid INT REFERENCES users(userid) NOT NULL,
+	videoid INT REFERENCES video(videoId) NOT NULL
+
+
+)
+
+	
+
+
+CREATE TABLE tags
+(
+	tag_id INT PRIMARY KEY IDENTITY(1,1),
+	videoid INT REFERENCES video(videoid) NOT NULL,
+	userid INT REFERENCES users(userid) NOT NULL,
+	tag_name VARCHAR(100)
+)
+
+
+CREATE TABLE video_edits
+(
+	edit_id INT PRIMARY KEY IDENTITY(1,1),
+	Text_Display BIT NOT NULL,
+	FastFoward BIT NOT NULL,
+	Slow_Mo BIT NOT NULL,
+	Color_Added BIT NOT NULL,
+
+)
+
+
+
+CREATE TABLE edited_videos
+(
+	edited_videos_id INT PRIMARY KEY IDENTITY(1,1),
+	edit_id INT REFERENCES video_edits(edit_id),
+	videoid INT REFERENCES video(videoid) NOT NULL,
+	userId INT REFERENCES users(userId) NOT NULL
+	
+)
+
+
+
+CREATE TABLE comments
+(
+	comment_id INT PRIMARY KEY IDENTITY(1,1),
+	userId INT REFERENCES users(userId) NOT NULL,
+	videoid INT REFERENCES video(videoid),
+	comments VARCHAR(200) NULL,
+
+	
+)
+
+
+
+
+
+CREATE TABLE Categories
+(
+	CategoryID INT PRIMARY KEY IDENTITY(1,1),
+	Product_Review_Videos INT NOT NULL,
+	How_To_Videos INT NOT NULL,
+	Vlogs INT NOT NULL,
+	Gaming_Videos INT NOT NULL,
+	Comedy_Videos INT NOT NULL,
+	Music_Videos INT NOT NULL,
+	Tag_Or_Challenge_Videos INT NOT NULL,
+	Educational_Videos INT NOT NULL,
+	Unboxing_Videos INT NOT NULL,
+
+)
+
+
+
+CREATE TABLE user_category
+(
+	user_category_id INT PRIMARY KEY IDENTITY(1,1),
+	category_id INT REFERENCES categories(CategoryId) NOT NULL,
+	videoid INT REFERENCES video(videoid) NOT NULL,
+	userid INT REFERENCES users(userid) NOT NULL
+
+)
+
