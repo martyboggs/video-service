@@ -3,6 +3,14 @@ import os
 import json
 from flask import render_template, request, redirect, url_for, Blueprint
 
+S3_BUCKET = os.environ.get('S3_BUCKET')
+ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
+SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+s3 = boto3.client('s3',
+  aws_access_key_id=ACCESS_KEY,
+  aws_secret_access_key=SECRET_KEY
+)
+
 video_api = Blueprint('video_api', __name__)
 
 @video_api.route('/save', methods=['POST'])
@@ -18,17 +26,8 @@ def account():
 
 @video_api.route('/sign_s3')
 def sign_s3():
-  #TODO: move these environment variables out of here later.
-  S3_BUCKET = os.environ.get('S3_BUCKET')
-  ACCESS_KEY = os.environ.get('AWS_ACCESS_KEY_ID')
-  SECRET_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-
   file_name = request.args.get('file_name')
   file_type = request.args.get('file_type')
-
-  s3 = boto3.client('s3',
-                    aws_access_key_id=ACCESS_KEY,
-                    aws_secret_access_key=SECRET_KEY)
 
   presigned_post = s3.generate_presigned_post(
     Bucket=S3_BUCKET,
