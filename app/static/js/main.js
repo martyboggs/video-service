@@ -1,7 +1,7 @@
 (function () {
 	window.video_service = {};
 
-	$('.tool form').on('submit', function (e) {
+	$('.tool.s3-upload form').on('submit', function (e) {
 		e.preventDefault();
 		var files = $(e.target).find('.tool__file').get(0).files;
 		var file = files[0];
@@ -58,4 +58,21 @@
 			console.log(err);
 		});
 	}
+
+	$('.tool.meme-tool form').on('submit', function (e) {
+		e.preventDefault();
+		var form = $(e.target);
+		var file = form.find('.tool__file').get(0).files[0];
+		var caption = form.find('.tool__changes').val();
+		if (!file) return alert('No file selected');
+		if (!caption) return alert('No caption');
+		var data = new FormData(e.target);
+		$.post('/video/caption', data
+		).done(function (response) {
+			alert('success');
+		}).fail(function (err) {
+			console.log(err);
+		});
+	});
+
 })();

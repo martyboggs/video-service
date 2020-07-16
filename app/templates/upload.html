@@ -14,14 +14,25 @@
 			<a href="/">home</a>
 			<a href="/upload">upload</a>
 		</div>
-		<h3>Upload your video</h3>
-		<div class="tool meme-tool">
+
+		<div class="tool s3-upload">
+			<h3>Upload your video</h3>
 			<form>
 				<input class="tool__file" type="file" name="video" accept="video/*" method="post" enctype="multipart/form-data">
-				<textarea class="tool__changes" type="text" name="changes" placeholder="Enter caption" rows="6"></textarea>
+				<!-- <textarea class="tool__changes" type="text" name="changes" placeholder="Enter caption" rows="6"></textarea> -->
 				<button class="tool__submit" type="submit">Send</button>
 			</form>	
 		</div>
+
+		<div class="tool meme-tool">
+			<h3>Add a caption to your video</h3>
+			<form>
+				<input class="tool__file" type="file" name="video" accept="video/*" method="post" enctype="multipart/form-data">
+				<textarea class="tool__changes" type="text" name="caption" placeholder="Enter caption" rows="6"></textarea>
+				<button class="tool__submit" type="submit">Edit video</button>
+			</form>	
+		</div>
+
 	</div>
 	<script src="/static/js/main.js"></script>
 </body>

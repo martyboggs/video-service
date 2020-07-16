@@ -1,6 +1,7 @@
 import boto3
 import os
 import json
+import ffmpeg
 from flask import render_template, request, redirect, url_for, Blueprint
 
 S3_BUCKET = os.environ.get('S3_BUCKET')
@@ -45,6 +46,19 @@ def sign_s3():
     'url': 'https://%s.s3.amazonaws.com/%s' % (S3_BUCKET, file_name)
   })
 
+@video_api.route('/caption', methods=['POST'])
+def caption():
+  video = request.form['video']
+  caption = request.form['caption']
+
+# https://github.com/kkroening/ffmpeg-python/issues/49
+  stream = ffmpeg.input('input.mp4')
+  stream = ffmpeg.hflip(stream)
+  stream = ffmpeg.output(stream, 'output.mp4')
+  ffmpeg.run(stream)
+
+
+  return 'hi'
 
 @video_api.route('/submit_form', methods=['POST'])
 def submit_form():
